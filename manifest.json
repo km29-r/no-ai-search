@@ -1,12 +1,19 @@
 {
+  "manifest_version": 3,
   "name": "No AI Search",
   "version": "1.0",
-  "manifest_version": 3,
-  "description": "Adds '-ai' to Google search queries when enabled.",
+  "description": "Automatically exclude AI results by appending '-ai' to search queries.",
   "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "No AI Search"
+  },
   "content_scripts": [
     {
-      "matches": ["https://www.google.com/search*"],
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.co.jp/*"
+      ],
       "js": ["content.js"],
       "run_at": "document_end"
     }
