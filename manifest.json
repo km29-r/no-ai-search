@@ -1,0 +1,14 @@
+{
+  "name": "No AI Search",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "Adds '-ai' to Google search queries when enabled.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
