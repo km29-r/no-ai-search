@@ -5,7 +5,7 @@
   "description": "Automatically exclude AI results by appending '-ai' to search queries.",
   "permissions": ["storage"],
   "action": {
-    "default_popup": "popup/popup.html",
+    "default_popup": "popup.html",
     "default_title": "No AI Search"
   },
   "content_scripts": [
