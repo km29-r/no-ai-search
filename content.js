@@ -1,19 +1,28 @@
-(function() {
-  function handleSubmit(e) {
+chrome.storage.local.get({ enabled: true }, ({ enabled }) => {
+  if (!enabled) return;
+
+  function shouldAppendAI(query) {
+    return query && !/-ai(\s+|$)/i.test(query);
+  }
+
+  function appendExcludeAI(input) {
+    if (input && input.value && shouldAppendAI(input.value)) {
+      input.value = input.value.trim() + ' -ai';
+    }
+  }
+
+  // 初期表示時に検索フォームを探して処理
+  const searchInputs = document.querySelectorAll('input[name="q"]');
+  searchInputs.forEach(appendExcludeAI);
+
+  // submit イベントで動的に対応
+  document.addEventListener('submit', (e) => {
     const form = e.target;
     const input = form.querySelector('input[name="q"]');
     if (!input) return;
 
-    const query = input.value.trim();
-    if (!query) return;
-
-    if (!/-ai\s*$/i.test(query)) {
-      e.preventDefault();
-      input.value = query + ' -ai';
-      form.submit();
+    if (shouldAppendAI(input.value)) {
+      e.preventDefault(); // フォームの送信を一旦止める
+      appendExcludeAI(input);
+      form.submit(); // 値を変えてから送信し直す
     }
-  }
-
-  document.addEventListener('submit', handleSubmit, true);
-})();
-
