@@ -12,7 +12,8 @@
     {
       "matches": [
         "https://www.google.com/*",
-        "https://www.google.co.jp/*"
+        "https://www.google.co.jp/*",
+        "https://www.google.*/*"
       ],
       "js": ["content.js"],
       "run_at": "document_end"
